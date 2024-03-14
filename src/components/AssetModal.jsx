@@ -32,20 +32,27 @@ const AssetModal = ({ asset, open, onClose }) => {
 	const filteredProperties = Object.entries(asset).filter(
 		([key]) => key !== "id" && key !== "logoUrl" && key !== "name"
 	);
+
+	const numberWithCommas = (number) => {
+		return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	};
+
 	return (
 		<Modal open={open} onClose={onClose}>
 			<Box sx={style}>
 				<div className="modal-content">
-					<CardMedia
-						component="img"
-						sx={{
-							height: 100,
-							width: 100,
-							marginBottom: "1rem",
-							borderRadius: "10px",
-						}}
-						image={asset?.logoUrl}
-					/>
+					{asset?.logoUrl && (
+						<CardMedia
+							component="img"
+							sx={{
+								height: 100,
+								width: 100,
+								marginBottom: "1rem",
+								borderRadius: "10px",
+							}}
+							image={asset?.logoUrl}
+						/>
+					)}
 					<h2 style={{ margin: "0 1rem 0 0" }}>{asset?.ticker}</h2>
 					<small>{asset?.name}</small>
 					<div style={{ marginTop: "2rem" }}>
@@ -62,7 +69,11 @@ const AssetModal = ({ asset, open, onClose }) => {
 									</strong>{" "}
 								</AccordionSummary>
 								<AccordionDetails>
-									{JSON.stringify(value, null, 2)}
+									{key === "marketCap" ? (
+										<span>{numberWithCommas(value)}</span>
+									) : (
+										JSON.stringify(value, null, 2)
+									)}
 								</AccordionDetails>
 							</Accordion>
 						))}

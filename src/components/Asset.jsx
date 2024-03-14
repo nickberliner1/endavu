@@ -28,15 +28,17 @@ const Asset = ({ asset, onAssetClick }) => {
 			}}
 		>
 			<CardContent className="card-content">
-				<CardMedia
-					component="img"
-					sx={{
-						height: 80,
-						width: 80,
-						borderRadius: "10px",
-					}}
-					image={asset?.logoUrl}
-				/>
+				{asset?.logoUrl && (
+					<CardMedia
+						component="img"
+						sx={{
+							height: 80,
+							width: 80,
+							borderRadius: "10px",
+						}}
+						image={asset?.logoUrl || null}
+					/>
+				)}
 				<h2 style={{ margin: "1rem 1rem 0 0" }}>{asset?.ticker}</h2>
 				<small style={{ margin: "0 1rem 1rem 0" }}>{asset?.name}</small>
 				<div>

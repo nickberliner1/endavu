@@ -15,7 +15,13 @@ function App() {
 
 	const [sortOrder, setSortOrder] = useState("default");
 
-	const uniqueCountries = [...new Set(assets.map((asset) => asset.country))];
+	const uniqueCountries = [
+		...new Set(
+			assets
+				.filter((asset) => asset?.assetClass !== "etf")
+				.map((asset) => asset?.country)
+		),
+	];
 
 	const [selectedCountry, setSelectedCountry] = useState("");
 
@@ -77,7 +83,7 @@ function App() {
 							<MenuItem value="">
 								<em>None</em>
 							</MenuItem>
-							{uniqueCountries.map((country) => (
+							{uniqueCountries?.map((country) => (
 								<MenuItem key={country} value={country}>
 									{country}
 								</MenuItem>
