@@ -33,6 +33,11 @@ p {
 		grid-template-columns: 1fr;
 	}
 }
+@media (min-width: 1080px) {
+	.list-container {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+}
 
 .card:hover {
 	transform: scale(1.05);
